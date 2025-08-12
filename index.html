@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pembelajaran Jaringan Sederhana | Cisco</title>
+    <meta name="subject" content="Pembelajaran Jaringan Sederhana | Cisco">
+    <meta name="description" content="Pengertian Jaringan Dengan Menggunakan Cisco Packet Tracer">
+    <meta name="keywords" content="jaringan komputer, belajar jaringan, ip address, switching, routing, routing static, routing dinamis, dinamis routing, static routing, networking, cisco, cisco networking, vlan, vlan switch, ospf, Open Shortest Path First">
+    <meta name="author" content="Annisa Haryoko">
+    <link href="dist/output.css" rel="stylesheet" />
+    <script>
+      if (
+        localStorage.theme === "dark" ||
+        (!("theme" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches)
+      ) {
+        document.documentElement.classList.add("dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+      }
+    </script>
+  </head>
+  <body>
+    
+    
+  <!-- Header Start -->
+  <header class="absolute top-0 left-0 z-10 flex w-full items-center bg-transparent">
+    <div class="container">
+      <div class="relative flex items-center justify-between">
+        <div class="px-4">
+          <span class="relative flex items-center justify-between">
+            <img
+            src="dist/img/cisco-logo3-rbg.png"
+            alt="Logo Cisco"
+            class="relative z-10 h-24 max-w-xs mx-auto "/>
+            <a href="#home" class="block py-6 text-lg font-bold text-primary dark:text-secondark">LEARN NETWOKING WITH CISCO</a>
+          </span>
+        </div>
+        <div class="flex items-center px-4">
+          <button
+            id="hamburger"
+            name="hamburger"
+            type="button"
+            class="absolute right-4 block lg:hidden">
+            <span class="hamburger-line origin-top-left transition duration-300 ease-in-out"></span>
+            <span class="hamburger-line transition duration-300 ease-in-out"></span>
+            <span class="hamburger-line origin-bottom-left transition duration-300 ease-in-out"></span>
+          </button>
+
+          <nav
+            id="nav-menu"
+            class="absolute right-2 top-full hidden w-full max-w-[250px] rounded-lg bg-white py-5 shadow-lg dark:bg-dark dark:shadow-primary lg:static lg:block lg:max-w-full lg:rounded-none lg:bg-transparent lg:shadow-none lg:dark:bg-transparent">
+            <ul class="block lg:flex">
+              <li class="group">
+                <a
+                  href="#home"
+                  class="mx-3 flex py-2 text-base text-dark group-hover:text-primary dark:text-white"
+                  >Home</a
+                >
+              </li>
+              <li class="group">
+                <a
+                  href="#network"
+                  class="mx-3 flex py-2 text-base text-dark group-hover:text-primary dark:text-white"
+                  >Network Fundamentas</a
+                >
+              </li>
+              <li class="group">
+                <a
+                  href="#switching"
+                  class="mx-3 flex py-2 text-base text-dark group-hover:text-primary dark:text-white"
+                  >Switching</a
+                >
+              </li>
+              <li class="group">
+                <a
+                  href="#routing"
+                  class="mx-3 flex py-2 text-base text-dark group-hover:text-primary dark:text-white"
+                  >Routing</a
+                >
+              </li>
+              <li class="mt-3 flex items-center pl-5 lg:mt-0">
+                <div class="flex">
+                  <span class="mr-1 text-sm text-dark dark:text-white">
+                    <img
+                    src="dist/img/light.png"
+                    alt="Light Mode"
+                    class="relative z-10 mx-auto max-w-full"/>
+                  </span>
+                  <input type="checkbox" class="hidden" id="dark-toggle" />
+                  <label for="dark-toggle">
+                    <div
+                      class="flex h-5 w-9 cursor-pointer items-center rounded-full bg-primary p-1"
+                    >
+                      <div
+                        class="toggle-circle h-4 w-4 rounded-full bg-white transition duration-300 ease-in-out"
+                      ></div>
+                    </div>
+                  </label>
+                  <span class="ml-1 text-sm text-dark dark:text-white">
+                    <img
+                    src="dist/img/dark.png"
+                    alt="Dark Mode"
+                    class="relative z-10 mx-auto max-w-full"/>
+                  </span>
+                </div>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </header>
+  <!-- Header End -->
+
+  <!-- Hero Section Start -->
+  <section id="home" class="pt-34 dark:bg-dark">
+    <div class="container">
+      <div class="flex flex-wrap">
+        <div class="w-full self-center px-4 mt-6 lg:w-1/2">
+          <h1 class="text-base font-semibold text-primary md:text-xl lg:text-1xl dark:text-secondark">
+            Hello World !<span
+              class="mt-1 block text-2xl font-bold text-dark dark:text-white lg:text-2xl"
+              >Learn Networking</span
+            >
+          </h1>
+          <h3 class="mb-12 text-sm font-medium text-secondary dark:text-white lg:text-w-40">
+            Simple Network Learning with Cisco
+          </h3>
+          <p class="mb-10 font-medium leading-relaxed text-justify text-secondary dark:text-white">
+            Apa Itu Cisco? 
+            CISCO merupakan salahsatu vendor perangkat terbesar dalam dunia jaringan. 
+            Selain CISCO, ada juga Mikrotik dan Juniper. Kesemuanya mempunyai
+            sertifikasinya masing-masing. Misalkan di CISCO ada CCNA (Cirsco Certified 
+            Network Academy), CCNP (Cirsco Certified Network Professional) dan CCIE (Cisco 
+            Certified Internetwork Expert).
+          </p>
+          <a
+            href="https://www.netacad.com/"
+            target="_blank"
+            class="shadow-lg mb-20 shadow-blue-500/50 rounded-full bg-primary py-3 px-10 text-base font-semibold text-white transition duration-300 ease-in-out hover:opacity-80 hover:shadow-lg"
+            >Website Networking Academy Cisco
+          </a>
+        </div>
+
+        <div class="w-full mt-20 self-end px-4 lg:w-1/2 ">
+          <div class="relative mt-20 lg:right-0 lg:mt-12">
+            <img
+              src="dist/img/jaringan2.png"
+              alt="Gambar Jaringan"
+              class="relative z-10 mb-20 mx-auto max-w-full"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Hero Section End -->
+
+  <!-- Network Section Start -->
+    <section id="network" class="bg-slate-100 pt-36 pb-32 mt-10 dark:bg-slate-800">
+      <div class="container">
+        <div class="flex flex-wrap">
+          <div class="w-full px-4">
+            <div class="mx-auto mb-16 max-w-xl text-center">
+              <h4 class="mb-2 text-lg font-semibold text-primary dark:text-secondark">NETWORK FUNDAMENTALS</h4>
+              <h2 class="mb-4 text-1xl font-bold text-dark dark:text-white sm:text-2xl lg:text-2xl">
+                Pengertian Jaringan dan IP Address 
+              </h2>
+
+            </div>
+          </div>
+          <div class="flex flex-wrap">
+            <div class="mb-10 w-full px-14 lg:w-1/2">
+              <h3 class="mb-4 text-2xl font-semibold text-center text-dark dark:text-white lg:pt-10 lg:text-3xl">
+                Pengertian Jaringan
+              </h3>         
+              <p class="max-w-xl text-justify text-base font-medium text-secondary dark:text-white lg:text-lg">
+                Jaringan atau network adalah kumpulan perangkat jaringan (network devices) dan perangkat endhost (end devices) yang terhubung satu sama lain dan dapat 
+                melakukan sharing informasi serta resources.
+              </p>
+              <p class="max-w-xl text-justify text-base font-medium text-secondary dark:text-white lg:text-lg">Komponen pembentuk jaringan:</p>
+              <ul class="max-w-md space-y-1 list-disc list-inside text-base font-medium text-secondary dark:text-white lg:text-lg">
+                  <li>
+                    Network devices: hub, bridge, switch dan router.
+                  </li>
+                  <li>
+                    End devices: PC, laptop, mobile, dll.
+                  </li>
+                  <li>
+                    Interconnection: NIC, konektor, media (cooper, fiber optic, wireless, dll).
+                  </li>
+              </ul>
+            </div>
+            <div class="mb-10 w-full px-14 lg:w-1/2">
+              <h3 class="mb-4 text-2xl font-semibold text-center text-dark dark:text-white lg:pt-10 lg:text-3xl">
+                IP Address
+              </h3>         
+              <p class="max-w-xl text-justify text-base font-medium text-secondary dark:text-white lg:text-lg">
+                IP address dipakai untuk pengalamatan dalam jaringan. 
+                IP Network sebagai identitas network/jaringan. Jika ada IP 192.168.1.0/24 berarti mewakili suatu kelompok IP (network) dari 192.168.1.1 – 192.168.1.254.
+                IP broadcast merupakan IP terakhir dalam network yang dipakai untuk membroadcast packet broadcast.
+                Host adalah ip yang disediakan untuk host.
+              </p>
+              <p class="max-w-xl text-justify text-base font-medium text-secondary dark:text-white lg:text-lg">Ada beberapa jenis IP:</p>
+              <ul class="max-w-md space-y-1 list-disc list-inside text-base font-medium text-secondary dark:text-white lg:text-lg">
+                  <li>
+                    IP public digunakan untuk mengakses internet.
+                  </li>
+                  <li>
+                    IP private digunakan untuk jaringan local.
+                  </li>
+              </ul>
+            </div>
+          </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+  <!-- Data Section End -->
+
+  <!-- Switching Section Start -->
+  <section id="switching" class="pt-36 pb-32 mt-10 dark:bg-dark">
+    <div class="container p-10">
+      <div class="flex flex-wrap">
+        <div class="w-full px-4">
+          <div class="mx-auto mb-16 max-w-xl text-center">
+            <h4 class="mb-2 text-lg font-semibold text-primary dark:text-secondark">SWITCHING</h4>
+            <h2 class="mb-4 text-1xl font-bold text-dark dark:text-white sm:text-2xl lg:text-2xl">
+              Perintah Dasar pada Switch dan Pengenalan VLAN (Virtual LAN)
+            </h2>
+          </div>
+        </div>
+        
+        <div class="flex w-full flex-wrap justify-center px-4 xl:mx-auto xl:w-10/12">
+          <div class="mb-12 p-4 lg:w-1/2">
+            <div class="overflow-hidden rounded-md shadow-md">
+              <img src="dist/img/switch1.PNG" alt="Perintah Dasar Switch 1" width="w-full mx-auto" />
+            </div>
+            <div class="overflow-hidden rounded-md shadow-md">
+              <img src="dist/img/switch2.PNG" alt="Perintah Dasar Switch 2" width="w-full mx-auto" />
+            </div>
+            <h3 class="mt-5 mb-3 text-xl font-semibold text-dark dark:text-white">
+              Perintah Dasar pada Switch
+            </h3>
+            <p class="text-justify text-base font-medium text-secondary dark:text-white">
+              Switch adalah bridge dengan beberapa kelebihan, yaitu: 
+              mempunyai banyak port, mempunyai macam-macam port seperti FastEthernet & Gigabit, 
+              fast internet switching, dan large buffers.
+              <ul class="list-disc text-justify text-base font-medium text-secondary dark:text-white">
+                <li>User mode ditandai dengan tanda “>”.</li>
+                <li>Previlige mode ditandai dengan tanda “#”. Untuk masuk dari user mode ke
+                  previlige mode ketikkan perintah enable.</li>
+                <li>Global configuration mode digunakan untuk mengkonfigurasi perangkat.</li>
+              </ul>
+            </p>
+          </div>
+          <div class="mb-12 p-4 lg:w-1/2">
+            <div class="overflow-hidden rounded-md shadow-md">
+              <img src="dist/img/vlan1.PNG" alt="Perintah Dasar Switch Vlan1" width="w-full mx-auto" />
+              <img src="dist/img/vlan2.PNG" alt="Perintah Dasar Switch Vlan2" width="w-full mx-auto" />
+            </div>
+            <h3 class="mt-5 mb-3 text-xl font-semibold text-dark dark:text-white">
+              Pengenalan VLAN (Virtual LAN)
+            </h3>
+            <p class="text-justify text-base font-medium text-secondary dark:text-white">
+              Virtual LAN (VLAN) membagi satu broadcast domain menjadi beberapa broadcast domain, sehingga dalam satu switch bisa saja terdiri dari beberapa network.
+               VLAN adalah fasilitas yang dimiliki oleh switch manageable, contohnya cisco.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+  <!-- Switching Section End -->
+
+  <!-- Routing Section Start -->
+  <section id="routing" class="bg-slate-100 pt-36 pb-32 mt-10 dark:bg-slate-800">
+    <div class="container p-10">
+      <div class="flex flex-wrap">
+        <div class="w-full px-4">
+          <div class="mx-auto mb-16 max-w-xl text-center">
+            <h4 class="mb-2 text-lg font-semibold text-primary dark:text-secondark">ROUTING</h4>
+            <h2 class="mb-4 text-1xl font-bold text-dark dark:text-white sm:text-2xl lg:text-2xl">
+              Static Routing dan Dynamic Routing
+            </h2>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap">
+          <div class="w-full px-4 lg:w-1/2 xl:w-1/2">
+            <div class="mb-10 overflow-hidden rounded-xl bg-white shadow-lg dark:bg-slate-700">
+              <img src="dist/img/routing-static.PNG" alt="Routing Static" width="w-full mx-auto hover:scale-100" />
+              <div class="py-8 px-6">
+                <h3>
+                  <a
+                    href="#"
+                    class="mb-3 block truncate text-xl font-semibold text-dark hover:text-primary dark:text-white"
+                  >
+                  Static Routing
+                  </a>
+                </h3>
+                <p class="mb-6 text-base font-medium text-secondary dark:text-white">
+                  Dalam static routing, network administrator memasukkan route ke tabel routing secara manual untuk menuju ke spesific network. 
+                  Konfigurasi harus diupdate secara manual setiap terjadi perubahan topologi.
+                  <ul class="list-disc p-4 text-base font-medium text-secondary dark:text-white">
+                    <li>Static Routing mempunyai Administrative Distance (AD) 1 sehingga akan
+                      lebih dipilih daripada dynamic routing.</li>
+                    <li>Better security, static routes tidak diadvertise dalam network.</li>
+                    <li>Konfigurasi dan maintenance yang memakan waktu dan tidak cocok untuk network skala besar.</li>
+                    <li>Routing ke/dari stub network. Stub network adalah jaringan yang diakses
+                      hanya mempunyai 1 exit path (karena hanya mempunyai satu neighbor).</li>
+                    <li>Untuk unknown network menggunakan default route.</li>
+                  </ul>
+                </p>
+                <p class=" mt-6 mb-6 text-base font-medium dark:text-white"><a class="text-purple-500">ip route</a> (spaci) <a class="text-blue-500">destination network</a> (spaci) <a class="text-green-500">subnetmask</a> (spaci) <a class="text-red-500">ip/interface next-hop</a></p>
+              </div>
+            </div>
+          </div>
+          <div class="w-full px-4 lg:w-1/2 xl:w-1/2">
+            <div class="mb-10 overflow-hidden rounded-xl bg-white shadow-lg dark:bg-slate-700">
+              <img src="dist/img/routing-dinamis-ospf.PNG" alt="Routing Dinamis OSPF" width="w-full mx-auto hover:scale-100" />
+              <div class="py-8 px-6">
+                <h3>
+                  <a
+                    href="#"
+                    class="mb-3 block truncate text-xl font-semibold text-dark hover:text-primary dark:text-white"
+                  >
+                  Dynamic Routing
+                  </a>
+                </h3>
+                <p class="mb-6 text-base font-medium text-secondary dark:text-white">
+                  Dynamic routing menggunakan protocol routing dalam pembentukan tabel routing. 
+                  Ketika topologi berubah, tabel routing akan ikut berubah secara otomatis. <br>
+                  OSPF (Open Shortest Path First)
+                  <ul class="list-disc p-4 text-justify text-base font-medium text-secondary dark:text-white">
+                    <li>Open Standard & Open Standard</li>
+                    <li>Using SPF/Dijkstra Algorithm.</li>
+                    <li>Multicast for exchange information use port 89.</li>
+                    <li>Administrative distance 110 & Support IPv6.</li>
+                    <li>Classless routing protocol support VLSM/CIDR.</li>
+                  </ul>
+                </p>
+                <P class=" mt-6 mb-6 text-base font-medium dark:text-blue-50">Konfigurasi OSPF pada router. OSPF menggunakan process ID. Process ID pada 
+                  setiap router tidak harus sama, yang terpenting adalah areanya. Untuk terhubung 
+                  antara area yang satu dengan yang lain harus melewari area 0 atau area backbone.</P>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+  <!-- Routing Section End -->
+
+  <!-- Footer start -->
+  <footer class="bg-dark pt-20 px-14 pb-8 ">
+    <div class="container">
+      <div class="flex flex-wrap">
+        <div class="mb-12 w-full px-4 font-medium text-slate-300 md:w-1/3">
+          <h3 class="mb-5 text-2xl font-bold text-white">Learn Networking with Cisco</h3>
+          
+          <dl class="max-w-md text-slate-300 divide-y divide-gray-200 dark:text-white">
+            <div class="flex flex-col pb-3">
+                <dt class="mb-1 text-gray-500 md:text-base dark:text-gray-400">Email address</dt>
+                <dd class="text-base font-semibold">annisaharyoko20@gmail.com</dd>
+            </div>
+            <div class="flex flex-col py-3">
+                <dt class="mb-1 text-gray-500 md:text-base dark:text-gray-400">Home address</dt>
+                <dd class="text-base font-semibold">Bogor, West Java. Indonesia</dd>
+            </div>
+          </dl>
+        </div>
+
+        <div class="mb-12 w-full px-4 md:w-1/3">
+          <h3 class="mb-5 text-xl font-semibold text-white">Tautan Terkait Pembelajaran Jaringan</h3>
+          <ul class="text-slate-300">
+            <li>
+              <div class="relative pl-9">
+                <dt class="inline font-semibold text-slate-300 hover:text-primary" href="https://www.netacad.com/" target="_blank">
+                  <a
+                    class="absolute top-1 left-1 h-5 w-5 text-primary"
+                    href="https://www.netacad.com/"
+                    target="_blank"
+                    class="mr-5 flex h-50 w-50 items-center justify-center rounded-full border dark:text-secondark hover:border-primary hover:bg-primary hover:text-white">
+                    <img src="dist/img/cisco-logo4-rbg.png" class="flex-shrink-0 me-3" alt="Cisco Netwoking Academy">
+                  </a>
+                  <a href="https://www.netacad.com/" target="_blank">
+                    Cisco Netwoking Academy
+                  </a>
+                  </dt>
+              </div>
+            </li>
+            <li>
+              <div class="relative pl-9 mt-5">
+                <dt class="inline font-semibold text-slate-300 hover:text-primary">
+                  <a
+                    class="absolute top-1 left-1 h-5 w-5 text-primary"
+                    href="https://ngonfig.net/"
+                    target="_blank"
+                    class="mr-5 flex h-50 w-50 items-center justify-center rounded-full border dark:text-secondark hover:border-primary hover:bg-primary hover:text-white">
+                    <img src="dist/img/cisco-logo3-rbg.png" class="flex-shrink-0 me-3" alt="Belajar Config Jaringan">
+                  </a>
+                  <a href="https://ngonfig.net/" target="_blank">
+                    Belajar Config Jaringan
+                  </a>
+                  </dt>
+              </div>
+            </li>
+            <li>
+              <div class="relative pl-9 mt-5">
+                <dt class="inline font-semibold text-slate-300 hover:text-primary">
+                  <a
+                    class="absolute top-1 left-1 h-5 w-5 text-primary"
+                    href="https://www.tutorialjaringan.com/"
+                    target="_blank"
+                    class="mr-5 flex h-50 w-50 items-center justify-center rounded-full border dark:text-secondark hover:border-primary hover:bg-primary hover:text-white">
+                    <img src="dist/img/jaringan3.png" class="flex-shrink-0 me-3" alt="Tutorial Jaringan Komputer">
+                  </a>
+                  <a href="https://www.tutorialjaringan.com/" target="_blank">
+                    Tutorial Jaringan Komputer
+                  </a>
+                  </dt>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="mb-12 w-full px-4 md:w-1/3">
+          <h3 class="mb-5 text-xl font-semibold text-white">RESOURCES</h3>
+          <ul class="text-slate-300">
+            <li>
+              <a href="#home" class="mb-3 inline-block text-base hover:text-primary">Home</a>
+            </li>
+            <li>
+              <a href="#network" class="mb-3 inline-block text-base hover:text-primary"
+                >Network Fundamentas</a
+              >
+            </li>
+            <li>
+              <a href="#switching" class="mb-3 inline-block text-base hover:text-primary"
+                >Switching</a
+              >
+            </li>
+            <li>
+              <a href="#routing" class="mb-3 inline-block text-base hover:text-primary"
+                >Routing</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="w-full border-t border-slate-300 pt-8">
+        <div class="mb-5 flex items-center justify-center">
+          <!-- Instagram -->
+          <a
+            href="https://www.instagram.com/annis.hryk/"
+            target="_blank"
+            class="mr-3 flex h-9 w-9 items-center justify-center rounded-full border border-slate-300 text-slate-400 hover:border-primary hover:bg-primary hover:text-white"
+          >
+            <svg
+              role="img"
+              width="20"
+              class="fill-current"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <title>Instagram</title>
+              <path
+                d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.795 0-1.44-.646-1.44-1.44 0-.794.646-1.439 1.44-1.439.793-.001 1.44.645 1.44 1.439z"
+              />
+            </svg>
+          </a>
+
+          <!-- Youtube -->
+          <a
+            href="https://www.youtube.com/@annisaharyoko"
+            target="_blank"
+            class="mr-3 flex h-9 w-9 items-center justify-center rounded-full border border-slate-300 text-slate-400 hover:border-primary hover:bg-primary hover:text-white"
+          >
+            <svg
+              role="img"
+              width="20"
+              class="fill-current"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <title>YouTube</title>
+              <path
+                d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"
+              />
+            </svg>
+          </a>
+
+          <!-- Github -->
+          <a
+            href="https://github.com/annishryk"
+            target="_blank"
+            class="mr-3 flex h-9 w-9 items-center justify-center rounded-full border border-slate-300 text-slate-400 hover:border-primary hover:bg-primary hover:text-white"
+          >
+            <svg
+              role="img"
+              width="20"
+              class="fill-current"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <title>GitHub</title>
+              <path
+                d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"
+              />
+            </svg>
+          </a>
+        </div>
+        <p class="text-center text-xs font-medium text-slate-400">
+          Copyright © 2023 |
+          <a
+            href="https://www.instagram.com/annis.hryk/"
+            target="_blank"
+            class="font-semibold text-primary">
+            Annisa Haryoko
+          </a>
+          |
+          <a href="https://tailwindcss.com" target="_blank" class="font-semibold text-emerald-400">
+            Tailwind CSS
+          </a>
+        </p>
+      </div>
+    </div>
+  </footer>
+  <!-- Footer End -->
+
+      <!-- Back to top Start -->
+      <a
+        href="#home"
+        class="fixed right-4 bottom-4 z-[9999] hidden h-12 w-12 items-center justify-center rounded-lg bg-primary p-3 hover:animate-pulse"
+        id="to-top"
+      >
+        <span class="mt-2 block h-4 w-4 rotate-45 border-t-2 border-l-2"></span>
+      </a>
+    <!-- Back to top End -->
+
+    <script src="dist/js/script.js"></script>
+
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script> -->
+  </body>
+</html>
