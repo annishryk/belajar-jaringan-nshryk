@@ -80,6 +80,13 @@
                   >Routing</a
                 >
               </li>
+              <li class="group">
+                <a
+                  href="ipv4-calculator.html"
+                  class="mx-3 flex py-2 text-base text-dark group-hover:text-primary dark:text-white"
+                  >Kalkulator</a
+                >
+              </li>
               <li class="mt-3 flex items-center pl-5 lg:mt-0">
                 <div class="flex">
                   <span class="mr-1 text-sm text-dark dark:text-white">
@@ -115,7 +122,7 @@
   <!-- Header End -->
 
   <!-- Hero Section Start -->
-  <section id="home" class="pt-34 dark:bg-dark">
+  <section id="home" class="pt-18 dark:bg-dark">
     <div class="container">
       <div class="flex flex-wrap">
         <div class="w-full self-center px-4 mt-6 lg:w-1/2">
@@ -140,7 +147,7 @@
             href="https://www.netacad.com/"
             target="_blank"
             class="shadow-lg mb-20 shadow-blue-500/50 rounded-full bg-primary py-3 px-10 text-base font-semibold text-white transition duration-300 ease-in-out hover:opacity-80 hover:shadow-lg"
-            >Website Networking Academy Cisco
+            >Networking Academy Cisco
           </a>
         </div>
 
@@ -316,7 +323,26 @@
                     <li>Untuk unknown network menggunakan default route.</li>
                   </ul>
                 </p>
-                <p class=" mt-6 mb-6 text-base font-medium dark:text-white"><a class="text-purple-500">ip route</a> (spaci) <a class="text-blue-500">destination network</a> (spaci) <a class="text-green-500">subnetmask</a> (spaci) <a class="text-red-500">ip/interface next-hop</a></p>
+                <!-- Terminal UI Start -->
+                <div class="mt-6 mb-6 overflow-hidden rounded-lg bg-slate-900 shadow-lg ring-1 ring-white/10 dark:bg-slate-950">
+                  <!-- Terminal Header -->
+                  <div class="flex items-center gap-2 bg-slate-800 px-4 py-2 dark:bg-slate-900">
+                    <div class="h-3 w-3 rounded-full bg-red-500"></div>
+                    <div class="h-3 w-3 rounded-full bg-yellow-500"></div>
+                    <div class="h-3 w-3 rounded-full bg-green-500"></div>
+                    <span class="ml-2 font-mono text-xs text-slate-400">Router(config)#</span>
+                  </div>
+                  <!-- Terminal Body -->
+                  <div class="overflow-x-auto p-4">
+                    <p class="font-mono text-sm text-slate-300">
+                      <span class="text-purple-400">ip route</span>
+                      <span class="text-blue-400">destination_network</span>
+                      <span class="text-green-400">subnet_mask</span>
+                      <span class="text-red-400">next_hop_ip</span>
+                    </p>
+                  </div>
+                </div>
+                <!-- Terminal UI End -->
               </div>
             </div>
           </div>
@@ -367,7 +393,9 @@
           <dl class="max-w-md text-slate-300 divide-y divide-gray-200 dark:text-white">
             <div class="flex flex-col pb-3">
                 <dt class="mb-1 text-gray-500 md:text-base dark:text-gray-400">Email address</dt>
-                <dd class="text-base font-semibold">annisaharyoko20@gmail.com</dd>
+                <dd class="text-base font-semibold">
+                  <a href="mailto:annisaharyoko20@gmail.com" class="hover:text-primary">annisaharyoko20@gmail.com</a>
+                </dd>
             </div>
             <div class="flex flex-col py-3">
                 <dt class="mb-1 text-gray-500 md:text-base dark:text-gray-400">Home address</dt>
@@ -451,6 +479,11 @@
                 >Routing</a
               >
             </li>
+            <li>
+              <a href="ipv4-calculator.html" class="mb-3 inline-block text-base hover:text-primary"
+                >Kalkulator IPv4</a
+              >
+            </li>
           </ul>
         </div>
       </div>
@@ -518,7 +551,7 @@
           </a>
         </div>
         <p class="text-center text-xs font-medium text-slate-400">
-          Copyright © 2023 |
+          Copyright © 2023 - 2026 |
           <a
             href="https://www.instagram.com/annis.hryk/"
             target="_blank"
@@ -548,5 +581,6 @@
     <script src="dist/js/script.js"></script>
 
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script> -->
+     <!-- Jalankan ini saat menjalankannya: npx @tailwindcss/cli -i ./src/input.css -o ./dist/output.css --watch -->
   </body>
 </html>

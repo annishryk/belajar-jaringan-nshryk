@@ -1,0 +1,551 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kalkulator IPv4 / CIDR | Learn Networking with Cisco</title>
+    <meta name="subject" content="Kalkulator IPv4 / CIDR" />
+    <meta
+      name="description"
+      content="Hitung network address, broadcast, subnet mask, host range dari IP dan CIDR secara otomatis."
+    />
+    <meta name="author" content="Annisa Haryoko" />
+    <link href="dist/output.css" rel="stylesheet" />
+    <script>
+      if (
+        localStorage.theme === "dark" ||
+        (!("theme" in localStorage) &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches)
+      ) {
+        document.documentElement.classList.add("dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+      }
+    </script>
+  </head>
+  <body class="dark:bg-dark">
+    <!-- Header Start (sama seperti index.html) -->
+    <header
+      class="absolute top-0 left-0 z-10 flex w-full items-center bg-transparent"
+    >
+      <div class="container">
+        <div class="relative flex items-center justify-between">
+          <div class="px-4">
+            <span class="relative flex items-center justify-between">
+              <img
+                src="dist/img/cisco-logo3-rbg.png"
+                alt="Logo Cisco"
+                class="relative z-10 h-24 max-w-xs mx-auto"
+              />
+              <a
+                href="index.html#home"
+                class="block py-6 text-lg font-bold text-primary dark:text-secondark"
+                >LEARN NETWOKING WITH CISCO</a
+              >
+            </span>
+          </div>
+          <div class="flex items-center px-4">
+            <button
+              id="hamburger"
+              name="hamburger"
+              type="button"
+              class="absolute right-4 block lg:hidden"
+            >
+              <span
+                class="hamburger-line origin-top-left transition duration-300 ease-in-out"
+              ></span>
+              <span
+                class="hamburger-line transition duration-300 ease-in-out"
+              ></span>
+              <span
+                class="hamburger-line origin-bottom-left transition duration-300 ease-in-out"
+              ></span>
+            </button>
+
+            <nav
+              id="nav-menu"
+              class="absolute right-2 top-full hidden w-full max-w-[250px] rounded-lg bg-white py-5 shadow-lg dark:bg-dark dark:shadow-primary lg:static lg:block lg:max-w-full lg:rounded-none lg:bg-transparent lg:shadow-none lg:dark:bg-transparent"
+            >
+              <ul class="block lg:flex">
+                <li class="group">
+                  <a
+                    href="index.html#home"
+                    class="mx-3 flex py-2 text-base text-dark group-hover:text-primary dark:text-white"
+                    >Home</a
+                  >
+                </li>
+                <li class="group">
+                  <a
+                    href="index.html#network"
+                    class="mx-3 flex py-2 text-base text-dark group-hover:text-primary dark:text-white"
+                    >Network Fundamentas</a
+                  >
+                </li>
+                <li class="group">
+                  <a
+                    href="index.html#switching"
+                    class="mx-3 flex py-2 text-base text-dark group-hover:text-primary dark:text-white"
+                    >Switching</a
+                  >
+                </li>
+                <li class="group">
+                  <a
+                    href="index.html#routing"
+                    class="mx-3 flex py-2 text-base text-dark group-hover:text-primary dark:text-white"
+                    >Routing</a
+                  >
+                </li>
+                <li class="group">
+                  <a
+                    href="ipv4-calculator.html"
+                    class="mx-3 flex py-2 text-base font-semibold text-primary"
+                    >Kalkulator</a
+                  >
+                </li>
+                <li class="mt-3 flex items-center pl-5 lg:mt-0">
+                  <div class="flex">
+                    <span class="mr-1 text-sm text-dark dark:text-white">
+                      <img
+                        src="dist/img/light.png"
+                        alt="Light Mode"
+                        class="relative z-10 mx-auto max-w-full"
+                      />
+                    </span>
+                    <input type="checkbox" class="hidden" id="dark-toggle" />
+                    <label for="dark-toggle">
+                      <div
+                        class="flex h-5 w-9 cursor-pointer items-center rounded-full bg-primary p-1"
+                      >
+                        <div
+                          class="toggle-circle h-4 w-4 rounded-full bg-white transition duration-300 ease-in-out"
+                        ></div>
+                      </div>
+                    </label>
+                    <span class="ml-1 text-sm text-dark dark:text-white">
+                      <img
+                        src="dist/img/dark.png"
+                        alt="Dark Mode"
+                        class="relative z-10 mx-auto max-w-full"
+                      />
+                    </span>
+                  </div>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- Header End -->
+
+    <!-- Kalkulator Section Start -->
+    <section id="calculator" class="pt-44 pb-24 dark:bg-dark">
+      <div class="container">
+        <div class="mx-auto mb-12 max-w-2xl text-center px-4">
+          <span class="mb-2 block text-base font-semibold text-primary"
+            >TOOLS</span
+          >
+          <h1
+            class="mb-4 text-2xl font-bold text-dark dark:text-white sm:text-3xl"
+          >
+            Kalkulator IPv4 / CIDR
+          </h1>
+          <p class="text-base font-medium text-secondary dark:text-slate-300">
+            Masukkan alamat IP dan prefix CIDR untuk langsung dapat network
+            address, broadcast, subnet mask, dan host range. Semua dihitung di
+            browser kamu, tanpa dikirim ke server mana pun.
+          </p>
+        </div>
+
+        <div class="mx-auto max-w-3xl px-4">
+          <!-- Form -->
+          <form
+            id="calc-form"
+            class="mb-8 rounded-2xl bg-slate-100 p-6 shadow-lg dark:bg-slate-800 sm:p-8"
+          >
+            <div class="flex flex-wrap gap-4">
+              <div class="w-full sm:flex-1">
+                <label
+                  for="ip-input"
+                  class="mb-2 block text-sm font-semibold text-dark dark:text-white"
+                  >Alamat IP</label
+                >
+                <input
+                  type="text"
+                  id="ip-input"
+                  placeholder="192.168.1.10"
+                  value="192.168.1.10"
+                  class="w-full rounded-lg border border-slate-300 bg-white px-4 py-3 font-mono text-dark outline-none focus:border-primary dark:border-slate-600 dark:bg-slate-900 dark:text-white"
+                />
+              </div>
+              <div class="w-full sm:w-40">
+                <label
+                  for="prefix-input"
+                  class="mb-2 block text-sm font-semibold text-dark dark:text-white"
+                  >Prefix (CIDR)</label
+                >
+                <div class="flex items-center">
+                  <span
+                    class="mr-2 font-mono text-lg text-secondary dark:text-slate-300"
+                    >/</span
+                  >
+                  <input
+                    type="number"
+                    id="prefix-input"
+                    min="0"
+                    max="32"
+                    value="24"
+                    class="w-full rounded-lg border border-slate-300 bg-white px-4 py-3 font-mono text-dark outline-none focus:border-primary dark:border-slate-600 dark:bg-slate-900 dark:text-white"
+                  />
+                </div>
+              </div>
+              <!-- Tombol Hitung -->
+              <div class="mt-8 w-full sm:w-auto">
+                <button type="submit" class="w-full rounded-lg bg-primary py-2 px-8  text-sm font-semibold text-white shadow-lg shadow-blue-500/50 transition duration-300 ease-in-out hover:opacity-80 sm:w-auto">
+                  Hitung Subnet
+                </button>
+              </div>
+            </div>
+
+            
+
+           <!-- Riwayat -->
+            <div
+              class="mt-6 border-t border-slate-300 pt-4 dark:border-slate-700"
+            >
+              <div class="flex items-center justify-between mb-2">
+                <p class="text-sm font-semibold text-dark dark:text-white">
+                  Riwayat terakhir
+                </p>
+                <button
+                  type="button"
+                  id="clear-history"
+                  class="text-xs font-medium text-red-500 hover:underline dark:text-red-400"
+                >
+                  Hapus Riwayat
+                </button>
+              </div>
+              <div id="history-list" class="flex flex-wrap gap-2"></div>
+            </div>
+
+          </form>
+
+          <!-- Error box -->
+          <div
+            id="error-box"
+            class="mb-8 hidden rounded-lg border border-red-300 bg-red-50 px-4 py-3 text-sm text-red-600 dark:border-red-900 dark:bg-red-950 dark:text-red-300"
+          ></div>
+
+          <!-- Result card -->
+          <div
+            id="result-card"
+            class="hidden rounded-2xl bg-white p-6 shadow-lg ring-1 ring-slate-200 dark:bg-slate-800 dark:ring-slate-700 sm:p-8"
+          >
+            <h2 class="mb-4 text-lg font-bold text-dark dark:text-white">
+              Hasil Perhitungan
+            </h2>
+            <table class="w-full text-sm">
+              <tbody id="result-body"></tbody>
+            </table>
+
+            <div class="mt-6 border-t border-slate-200 pt-6 dark:border-slate-700">
+              <p class="mb-3 text-sm font-semibold text-dark dark:text-white">
+                Breakdown Biner
+              </p>
+              
+              <!-- Container Biner -->
+              <div class="space-y-2">
+                
+                <!-- IP Row -->
+                <div class="flex items-center justify-between gap-2 rounded-lg bg-slate-50 p-3 ring-1 ring-slate-200 dark:bg-slate-900 dark:ring-slate-700">
+                  <div class="flex items-center gap-3 overflow-hidden font-mono text-xs sm:text-sm">
+                    <span class="w-14 flex-shrink-0 font-semibold text-slate-400 dark:text-slate-500">IP</span>
+                    <div class="overflow-x-auto py-1">
+                      <span id="binary-ip" class="whitespace-nowrap text-dark dark:text-slate-200"></span>
+                    </div>
+                  </div>
+                  <button onclick="copyText('binary-ip', this)" class="flex flex-shrink-0 items-center justify-center rounded bg-slate-200 p-1.5 text-slate-500 transition-all hover:bg-primary hover:text-white dark:bg-slate-800 dark:text-slate-400 dark:hover:bg-primary" title="Salin IP">
+                    <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                  </button>
+                </div>
+
+                <!-- Mask Row -->
+                <div class="flex items-center justify-between gap-2 rounded-lg bg-slate-50 p-3 ring-1 ring-slate-200 dark:bg-slate-900 dark:ring-slate-700">
+                  <div class="flex items-center gap-3 overflow-hidden font-mono text-xs sm:text-sm">
+                    <span class="w-14 flex-shrink-0 font-semibold text-slate-400 dark:text-slate-500">Mask</span>
+                    <div class="overflow-x-auto py-1">
+                      <span id="binary-mask" class="whitespace-nowrap text-dark dark:text-slate-200"></span>
+                    </div>
+                  </div>
+                  <button onclick="copyText('binary-mask', this)" class="flex flex-shrink-0 items-center justify-center rounded bg-slate-200 p-1.5 text-slate-500 transition-all hover:bg-primary hover:text-white dark:bg-slate-800 dark:text-slate-400 dark:hover:bg-primary" title="Salin Mask">
+                    <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                  </button>
+                </div>
+
+                <!-- Network Row -->
+                <div class="flex items-center justify-between gap-2 rounded-lg bg-slate-50 p-3 ring-1 ring-slate-200 dark:bg-slate-900 dark:ring-slate-700">
+                  <div class="flex items-center gap-3 overflow-hidden font-mono text-xs sm:text-sm">
+                    <span class="w-14 flex-shrink-0 font-semibold text-slate-400 dark:text-slate-500">Network</span>
+                    <div class="overflow-x-auto py-1">
+                      <span id="binary-network" class="whitespace-nowrap text-dark dark:text-slate-200"></span>
+                    </div>
+                  </div>
+                  <button onclick="copyText('binary-network', this)" class="flex flex-shrink-0 items-center justify-center rounded bg-slate-200 p-1.5 text-slate-500 transition-all hover:bg-primary hover:text-white dark:bg-slate-800 dark:text-slate-400 dark:hover:bg-primary" title="Salin Network">
+                    <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                  </button>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Kalkulator Section End -->
+
+    <!-- Footer start -->
+    <footer class="bg-dark pt-20 px-14 pb-8">
+      <div class="container">
+        <div class="flex flex-wrap">
+          <div class="mb-12 w-full px-4 font-medium text-slate-300 md:w-1/3">
+            <h3 class="mb-5 text-2xl font-bold text-white">
+              Learn Networking with Cisco
+            </h3>
+
+            <dl
+              class="max-w-md text-slate-300 divide-y divide-gray-200 dark:text-white"
+            >
+              <div class="flex flex-col pb-3">
+                <dt class="mb-1 text-gray-500 md:text-base dark:text-gray-400">
+                  Email address
+                </dt>
+                <dd class="text-base font-semibold">
+                  <a
+                    href="mailto:annisaharyoko20@gmail.com"
+                    class="hover:text-primary"
+                    >annisaharyoko20@gmail.com</a
+                  >
+                </dd>
+              </div>
+              <div class="flex flex-col py-3">
+                <dt class="mb-1 text-gray-500 md:text-base dark:text-gray-400">
+                  Home address
+                </dt>
+                <dd class="text-base font-semibold">
+                  Bogor, West Java. Indonesia
+                </dd>
+              </div>
+            </dl>
+          </div>
+
+          <div class="mb-12 w-full px-4 md:w-1/3">
+            <h3 class="mb-5 text-xl font-semibold text-white">
+              Tautan Terkait Pembelajaran Jaringan
+            </h3>
+            <ul class="text-slate-300">
+              <li>
+                <div class="relative pl-9">
+                  <dt
+                    class="inline font-semibold text-slate-300 hover:text-primary"
+                    href="https://www.netacad.com/"
+                    target="_blank"
+                  >
+                    <a
+                      class="absolute top-1 left-1 h-5 w-5 text-primary"
+                      href="https://www.netacad.com/"
+                      target="_blank"
+                      class="mr-5 flex h-50 w-50 items-center justify-center rounded-full border dark:text-secondark hover:border-primary hover:bg-primary hover:text-white"
+                    >
+                      <img
+                        src="dist/img/cisco-logo4-rbg.png"
+                        class="flex-shrink-0 me-3"
+                        alt="Cisco Netwoking Academy"
+                      />
+                    </a>
+                    <a href="https://www.netacad.com/" target="_blank">
+                      Cisco Netwoking Academy
+                    </a>
+                  </dt>
+                </div>
+              </li>
+              <li>
+                <div class="relative pl-9 mt-5">
+                  <dt
+                    class="inline font-semibold text-slate-300 hover:text-primary"
+                  >
+                    <a
+                      class="absolute top-1 left-1 h-5 w-5 text-primary"
+                      href="https://ngonfig.net/"
+                      target="_blank"
+                      class="mr-5 flex h-50 w-50 items-center justify-center rounded-full border dark:text-secondark hover:border-primary hover:bg-primary hover:text-white"
+                    >
+                      <img
+                        src="dist/img/cisco-logo3-rbg.png"
+                        class="flex-shrink-0 me-3"
+                        alt="Belajar Config Jaringan"
+                      />
+                    </a>
+                    <a href="https://ngonfig.net/" target="_blank">
+                      Belajar Config Jaringan
+                    </a>
+                  </dt>
+                </div>
+              </li>
+              <li>
+                <div class="relative pl-9 mt-5">
+                  <dt
+                    class="inline font-semibold text-slate-300 hover:text-primary"
+                  >
+                    <a
+                      class="absolute top-1 left-1 h-5 w-5 text-primary"
+                      href="https://www.tutorialjaringan.com/"
+                      target="_blank"
+                      class="mr-5 flex h-50 w-50 items-center justify-center rounded-full border dark:text-secondark hover:border-primary hover:bg-primary hover:text-white"
+                    >
+                      <img
+                        src="dist/img/jaringan3.png"
+                        class="flex-shrink-0 me-3"
+                        alt="Tutorial Jaringan Komputer"
+                      />
+                    </a>
+                    <a href="https://www.tutorialjaringan.com/" target="_blank">
+                      Tutorial Jaringan Komputer
+                    </a>
+                  </dt>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="mb-12 w-full px-4 md:w-1/3">
+            <h3 class="mb-5 text-xl font-semibold text-white">RESOURCES</h3>
+            <ul class="text-slate-300">
+              <li>
+                <a
+                  href="#home"
+                  class="mb-3 inline-block text-base hover:text-primary"
+                  >Home</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#network"
+                  class="mb-3 inline-block text-base hover:text-primary"
+                  >Network Fundamentas</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#switching"
+                  class="mb-3 inline-block text-base hover:text-primary"
+                  >Switching</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#routing"
+                  class="mb-3 inline-block text-base hover:text-primary"
+                  >Routing</a
+                >
+              </li>
+              <li>
+                <a
+                  href="ipv4-calculator.html"
+                  class="mb-3 inline-block text-base hover:text-primary"
+                  >Kalkulator IPv4</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="w-full border-t border-slate-300 pt-8">
+          <div class="mb-5 flex items-center justify-center">
+            <!-- Instagram -->
+            <a
+              href="https://www.instagram.com/annis.hryk/"
+              target="_blank"
+              class="mr-3 flex h-9 w-9 items-center justify-center rounded-full border border-slate-300 text-slate-400 hover:border-primary hover:bg-primary hover:text-white"
+            >
+              <svg
+                role="img"
+                width="20"
+                class="fill-current"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <title>Instagram</title>
+                <path
+                  d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.795 0-1.44-.646-1.44-1.44 0-.794.646-1.439 1.44-1.439.793-.001 1.44.645 1.44 1.439z"
+                />
+              </svg>
+            </a>
+
+            <!-- Youtube -->
+            <a
+              href="https://www.youtube.com/@annisaharyoko"
+              target="_blank"
+              class="mr-3 flex h-9 w-9 items-center justify-center rounded-full border border-slate-300 text-slate-400 hover:border-primary hover:bg-primary hover:text-white"
+            >
+              <svg
+                role="img"
+                width="20"
+                class="fill-current"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <title>YouTube</title>
+                <path
+                  d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"
+                />
+              </svg>
+            </a>
+
+            <!-- Github -->
+            <a
+              href="https://github.com/annishryk"
+              target="_blank"
+              class="mr-3 flex h-9 w-9 items-center justify-center rounded-full border border-slate-300 text-slate-400 hover:border-primary hover:bg-primary hover:text-white"
+            >
+              <svg
+                role="img"
+                width="20"
+                class="fill-current"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <title>GitHub</title>
+                <path
+                  d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"
+                />
+              </svg>
+            </a>
+          </div>
+          <p class="text-center text-xs font-medium text-slate-400">
+            Copyright © 2023 - 2026 |
+            <a
+              href="https://www.instagram.com/annis.hryk/"
+              target="_blank"
+              class="font-semibold text-primary"
+            >
+              Annisa Haryoko
+            </a>
+            |
+            <a
+              href="https://tailwindcss.com"
+              target="_blank"
+              class="font-semibold text-emerald-400"
+            >
+              Tailwind CSS
+            </a>
+          </p>
+        </div>
+      </div>
+    </footer>
+    <!-- Footer End -->
+
+    <script src="dist/js/script.js"></script>
+    <script src="dist/js/calculator.js"></script>
+  </body>
+</html>
